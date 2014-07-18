@@ -65,6 +65,18 @@
     <Reference Include="Metrics">
       <HintPath>..\..\build\packages\Metrics.NET.0.1.9\lib\net45\Metrics.dll</HintPath>
     </Reference>
+    <Reference Include="MySql.Data, Version=6.6.4.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\build\packages\MySQL.NET.6.6.4\lib\net40\MySql.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="MySql.Data.Entity, Version=6.6.4.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\build\packages\MySQL.NET.6.6.4\lib\net40\MySql.Data.Entity.dll</HintPath>
+    </Reference>
+    <Reference Include="MySql.Web, Version=6.6.4.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\build\packages\MySQL.NET.6.6.4\lib\net40\MySql.Web.dll</HintPath>
+    </Reference>
     <Reference Include="Nancy, Version=0.23.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\build\packages\Nancy.0.23.0\lib\net40\Nancy.dll</HintPath>
@@ -198,6 +210,10 @@
     <Compile Include="Persistance\Blocks\ConfirmedBlock.cs" />
     <Compile Include="Persistance\Blocks\KickedBlock.cs" />
     <Compile Include="Persistance\Blocks\OrphanedBlock.cs" />
+    <Compile Include="Persistance\MySQL\IMySQL.cs" />
+    <Compile Include="Persistance\MySQL\IMySQLConfig.cs" />
+    <Compile Include="Persistance\MySQL\MySQL.cs" />
+    <Compile Include="Persistance\MySQL\MySQLConfig.cs" />
     <Compile Include="Persistance\Redis\IRedisConfig.cs" />
     <Compile Include="Persistance\Redis\RedisConfig.cs" />
     <Compile Include="Server\Mining\Vanilla\IVanillaMiner.cs" />

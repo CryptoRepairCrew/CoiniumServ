@@ -22,6 +22,7 @@
 #endregion
 
 using CoiniumServ.Persistance.Redis;
+using CoiniumServ.Persistance.MySQL;
 using CoiniumServ.Repository.Context;
 using CoiniumServ.Server.Web;
 
@@ -33,6 +34,7 @@ namespace CoiniumServ.Utils.Configuration
 
         private dynamic _data;
         private IRedisConfig _redisConfig;
+        private IMySQLConfig _MySQLConfig;
         private IWebServerConfig _webServerConfig;
 
         /// <summary>
@@ -55,6 +57,12 @@ namespace CoiniumServ.Utils.Configuration
         {
             // return the redis config, if we haven't read it yet, do so.
             return _redisConfig ?? (_redisConfig = new RedisConfig(Get().storage.redis));
+        }
+        
+        public IMySQLConfig GetMySQLConfig()
+        {
+            // return the MySQL Config. If we gavent read it yet, do so
+            return _MySQLConfig ?? (_MySQLConfig = new MySQLConfig(Get().storage.mysql));
         }
 
         public IWebServerConfig GetWebServerConfig()

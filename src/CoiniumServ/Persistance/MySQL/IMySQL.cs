@@ -21,24 +21,10 @@
 // 
 #endregion
 
-using CoiniumServ.Persistance.MySQL;
-using CoiniumServ.Persistance.Redis;
-using CoiniumServ.Server.Web;
-
-namespace CoiniumServ.Utils.Configuration
+namespace CoiniumServ.Persistance.MySQL
 {
-    public interface IGlobalConfigFactory
+    public interface IMySQL
     {
-        /// <summary>
-        /// Gets the configuration.
-        /// </summary>
-        /// <returns></returns>
-        dynamic Get();
-
-        IRedisConfig GetRedisConfig();
-
-        IMySQLConfig GetMySQLConfig();
-
-        IWebServerConfig GetWebServerConfig();
+        bool IsConnected { get; }
     }
 }

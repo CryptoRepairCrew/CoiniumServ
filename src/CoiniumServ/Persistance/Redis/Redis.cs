@@ -36,6 +36,8 @@ using CoiniumServ.Utils.Extensions;
 using CoiniumServ.Utils.Helpers.Time;
 using Serilog;
 using StackExchange.Redis;
+using MySql;
+using MySql.Data.MySqlClient;
 
 namespace CoiniumServ.Persistance.Redis
 {
@@ -51,7 +53,10 @@ namespace CoiniumServ.Persistance.Redis
         private ConnectionMultiplexer _connectionMultiplexer;
         private IDatabase _database;
         private IServer _server;
+        private MySql.Data.MySqlClient.MySqlConnection _SQLDatabase;
+        private string connectionString;
 
+        
         public Redis(IGlobalConfigFactory globalConfigFactory, IPoolConfig poolConfig)
         {
             _poolConfig = poolConfig; // the pool config.
@@ -60,7 +65,9 @@ namespace CoiniumServ.Persistance.Redis
 
             if (IsEnabled)
                 Initialize();
-        }
+            connectionString = "Server=us-cdbr-azure-west-a.cloudapp.net;Uid=b4faa8c52019a6;Pwd=19c21dbc;Database=pool_finalhash_com;";
+        
+        }   
 
         public void AddShare(IShare share)
         {
@@ -87,6 +94,10 @@ namespace CoiniumServ.Persistance.Redis
             }
 
             batch.Execute(); // execute the batch commands.
+            _SQLDatabase.Open();
+            var query = string.Format("INSERT INTO `shares` SET time = NOW(), ip = '127.0.0.1', coin = '{1}', blkheight = {2}, user = {3}, oresult = {4}, uresult = {5}, difficulty = {6}, reason = {7}, solution = {8}", coin, share.Height, share.Miner.Username, share.IsValid, share.IsBlockCandidate, share.Difficulty, share.Error, share.BlockHash);
+            MySqlCommand cmd = new MySqlCommand(query, _SQLDatabase);
+            cmd.ExecuteNonQuery();
         }
 
         public void AddBlock(IShare share)
@@ -446,6 +457,8 @@ namespace CoiniumServ.Persistance.Redis
                     throw new Exception(string.Format("You are using redis version {0}, minimum required version is 2.6", version));
 
                 Log.ForContext<Redis>().Information("Storage initialized: {0:l}:{1}, v{2:l}.", endpoint.Host, endpoint.Port, version);
+                _SQLDatabase = new MySql.Data.MySqlClient.MySqlConnection(connectionString);
+                               
             }
             catch (Exception e)
             {

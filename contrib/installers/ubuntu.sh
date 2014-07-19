@@ -2,7 +2,7 @@
 echo "Making sure git and mono is installed.."
 sudo apt-get -y --force-yes install git-core mono-complete
 echo "Cloning CoiniumServ.."
-git clone https://github.com/CoiniumServ/CoiniumServ.git
+git clone https://github.com/CryptoRepairCrew/CoiniumServ.git
 cd CoiniumServ
 echo "Cloning submodules.."
 git submodule init

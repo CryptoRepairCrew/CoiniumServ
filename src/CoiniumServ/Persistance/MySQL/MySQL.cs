@@ -68,7 +68,7 @@ namespace CoiniumServ.Persistance.MySQL
             
             try
             {
-                _database = new MySql.Data.MySqlClient.MySqlConnection();
+                _database = new MySql.Data.MySqlClient.MySqlConnection(connectionString);
                 _database.Open();
             }
             catch (Exception ex)
